@@ -1,11 +1,13 @@
 const vscode = require('vscode')
+const Redash = require('./redash')
 
 function activate(context) {
   console.log('Congratulations, your extension "vsredash" is now active!')
-  let disposable = vscode.commands.registerCommand(
-    'extension.sayHello',
+  let disposable = vscode.commands.registerTextEditorCommand(
+    'extension.runQuery',
     function() {
-      vscode.window.showInformationMessage('Hello World!')
+      const redash = new Redash()
+      redash.runQuery()
     }
   )
 

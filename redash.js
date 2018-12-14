@@ -35,7 +35,9 @@ class Redash {
 
   convertCsvText(query_result_json) {
     const columns = query_result_json.data.columns.map(col => col.name)
-    const rows = query_result_json.data.rows.map(row => Object.values(row))
+    const rows = query_result_json.data.rows.map(row => {
+      return columns.map(key => row[key])
+    })
 
     let text = columns.join(',')
     rows.forEach(row => (text += '\n' + row.join(',')))
